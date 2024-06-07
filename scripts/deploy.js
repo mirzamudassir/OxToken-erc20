@@ -1,21 +1,23 @@
+const hre = require("hardhat");
 
 async function main() {
-    const [deployer] = await ethers.getSigners();
+  const [deployer] = await hre.ethers.getSigners();
 
-    console.log("Deploying contracts with the account:", deployer.address);
+  console.log("Deploying contracts with the account:", deployer.address);
 
-    const balance = await deployer.getBalance();
-    console.log("Account balance:", balance.toString());
+//   const initialSupply = hre.ethers.utils.parseEther("1000000"); // 1,000,000 tokens
 
-    const MyContract = await ethers.getContractFactory("OxToken");
-    const myContract = await MyContract.deploy("Oxt");
+  const OxTokenFactory = await hre.ethers.getContractFactory("OxToken");
+  const oxToken = await OxTokenFactory.deploy();
 
-    console.log("Contract deployed to:", myContract.address);
+  await oxToken.deployed();
+
+  console.log("OxToken deployed to:", oxToken.address);
 }
 
 main()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
     process.exit(1);
   });
