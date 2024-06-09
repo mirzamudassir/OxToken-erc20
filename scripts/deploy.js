@@ -9,7 +9,7 @@ async function main() {
   const metadataURI = "https://amethyst-neat-chimpanzee-299.mypinata.cloud/ipfs/QmSmnJvdF8SG7LLXd7sudCb5GhwozR6x275FbQvn5MULxT";
 
   const OxTokenFactory = await hre.ethers.getContractFactory("OxCoin");
-  const oxToken = await OxTokenFactory.deploy(initialSupply);
+  const oxToken = await OxTokenFactory.deploy(initialSupply, metadataURI);
 
   await oxToken.deployed();
 
